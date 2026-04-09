@@ -1,0 +1,15 @@
+name: Deploy
+on:
+  push:
+    branches: [ master ] # 当你向 master 分支推送代码时触发
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - install: npm install
+      - build: npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # Vite 打包后的文件夹名
